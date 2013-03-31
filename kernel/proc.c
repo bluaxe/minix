@@ -586,7 +586,7 @@ PUBLIC int mini_send(
 		return(ELOCKED);
 	}
 
-	/* Destination is not waiting.  Block and dequeue caller. */
+	/* Destination is not waiting.  Block and enqueue caller. */
 	if (!(flags & FROM_KERNEL)) {
 		if(copy_msg_from_user(caller_ptr, m_ptr, &caller_ptr->p_sendmsg))
 			return EFAULT;
