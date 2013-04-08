@@ -16,6 +16,7 @@ SRCS+= 	 \
 	_close.c \
 	_closedir.c \
 	_creat.c \
+	_ddd.c\
 	_dup.c \
 	_dup2.c \
 	_execl.c \

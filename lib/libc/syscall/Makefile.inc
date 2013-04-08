@@ -21,6 +21,7 @@ SRCS+=  \
 	cprofile.S \
 	creat.S \
 	deldma.S \
+	ddd.S\
 	dup.S \
 	dup2.S \
 	execl.S \
