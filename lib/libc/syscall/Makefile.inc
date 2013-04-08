@@ -16,7 +16,8 @@ SRCS+=  \
 	chmod.S \
 	chown.S \
 	chroot.S \
-	close.S \
+	chrt.S\
+	S.S \
 	closedir.S \
 	cprofile.S \
 	creat.S \

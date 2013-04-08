@@ -56,3 +56,5 @@
 #define reply_t4 	m4_l4
 #define reply_t5 	m4_l5
 
+/* The following names are synonyms for chrt */
+#define deadline  	m4_l1

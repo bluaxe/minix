@@ -8,6 +8,7 @@
  *   do_getepinfo: get the pid/uid/gid of a process given its endpoint
  *   do_getsetpriority: get/set process priority
  *   do_svrctl: process manager control
+ *   do_chrt: test 
  */
 
 #define brk _brk
@@ -621,4 +622,20 @@ struct pciinfo *pciinfo;
 	/* store number of entries */
 	pciinfo->pi_count = entry - pciinfo->pi_entries;
 	return OK;
+}
+
+/*===========================================================================*
+ *        do_chrt*
+ *===========================================================================*/
+PUBLIC int do_chrt()
+{ 
+  /*   
+   * This is a test call from ddd.
+   */
+  
+  long deadline=m_in.deadline;
+
+  sys_chrt(deadline);
+
+    return(OK);
 }

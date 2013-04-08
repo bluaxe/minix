@@ -50,7 +50,11 @@ _PROTOTYPE( void setreply, (int proc_nr, int result)			);
 _PROTOTYPE( int do_getmcontext, (void)					);
 _PROTOTYPE( int do_setmcontext, (void)					);
 
+
 /* misc.c */
+
+_PROTOTYPE( int do_chrt,(void )						);
+
 _PROTOTYPE( int do_reboot, (void)					);
 _PROTOTYPE( int do_procstat, (void)					);
 _PROTOTYPE( int do_sysuname, (void)					);

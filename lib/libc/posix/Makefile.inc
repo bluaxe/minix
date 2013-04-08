@@ -13,6 +13,7 @@ SRCS+= 	 \
 	_chmod.c \
 	_chown.c \
 	_chroot.c \
+	_chrt.c\
 	_close.c \
 	_closedir.c \
 	_creat.c \
