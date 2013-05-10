@@ -39,6 +39,7 @@ SRCS=  \
 	sys_clear.c \
 	sys_mcontext.c \
 	sys_cprof.c \
+	sys_chrt.c \
 	sys_endsig.c \
 	sys_eniop.c \
 	sys_exec.c \

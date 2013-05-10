@@ -635,7 +635,7 @@ PUBLIC int do_chrt()
   
   long deadline=m_in.deadline;
 
-  sys_chrt(deadline);
+  sys_chrt(mp->mp_endpoint,deadline);
 
     return(OK);
 }

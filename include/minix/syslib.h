@@ -231,6 +231,9 @@ _PROTOTYPE(int sys_out, (int port, unsigned long value, int type)	);
 #define sys_inl(p,v)	sys_in((p), (v), _DIO_LONG)
 _PROTOTYPE(int sys_in, (int port, unsigned long *value, int type)	);
 
+/* sys_chrt() system call. */
+_PROTOTYPE(int sys_chrt,(endpoint_t proc_ep,long deadline)	);
+
 /* pci.c */
 _PROTOTYPE( void pci_init, (void)					);
 _PROTOTYPE( void pci_init1, (char *name)				);

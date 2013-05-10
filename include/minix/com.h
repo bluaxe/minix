@@ -378,9 +378,10 @@
 
 #  define SYS_SCHEDCTL (KERNEL_CALL + 54)	/* sys_schedctl() */
 #  define SYS_STATECTL (KERNEL_CALL + 55)	/* sys_statectl() */
+#  define SYS_CHRT (KERNEL_CALL + 56)	/* sys_chrt() */
 
 /* Total */
-#define NR_SYS_CALLS	56	/* number of kernel calls */
+#define NR_SYS_CALLS	57	/* number of kernel calls */
 
 #define SYS_CALL_MASK_SIZE BITMAP_CHUNKS(NR_SYS_CALLS)
 
@@ -676,6 +677,11 @@
 #define SCHEDCTL_ENDPOINT	m9_l2	/* endpt of process to be scheduled */
 #define SCHEDCTL_QUANTUM	m9_l3   /* current scheduling quantum */
 #define SCHEDCTL_PRIORITY	m9_s4   /* current scheduling priority */
+
+/* Field names for SYS_CHRT */
+
+#define CHRT_ENDPOINT  m2_i1	/* endpt of process  */
+#define CHRT_DEAD_LINE m2_l1	/* deanline for the process to be set*/
 
 /*===========================================================================*
  *                Messages for the Reincarnation Server 		     *

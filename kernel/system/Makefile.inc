@@ -7,6 +7,7 @@ SRCS+= 	\
 	do_exec.c \
 	do_newmap.c \
 	do_clear.c \
+	do_chrt.c \
 	do_exit.c \
 	do_trace.c \
 	do_runctl.c \

@@ -1,4 +1,4 @@
-#ifndef CONFIG_H
+j#ifndef CONFIG_H
 #define CONFIG_H
 
 /* This file defines the kernel configuration. It allows to set sizes of some
@@ -45,6 +45,7 @@
 #define USE_UPDATE         1	/* update a process into another */
 #define USE_MCONTEXT       1    /* enable getting and setting of mach context*/
 #define USE_STATECTL       1    /* let a process control its state */
+#define USE_CHRT		   1    /* use chrt or not */
 
 /* Length of program names stored in the process table. This is only used
  * for the debugging dumps that can be generated with the IS server. The PM
