@@ -626,16 +626,16 @@ struct pciinfo *pciinfo;
 
 /*===========================================================================*
  *        do_chrt*
- *===========================================================================*/
+ *====chrt_=======================================================================*/
 PUBLIC int do_chrt()
 { 
   /*   
    * This is a test call from ddd.
    */
   
-  long deadline=m_in.deadline;
+  long dead_line=m_in.chrt_deadline;
 
-  sys_chrt(mp->mp_endpoint,deadline);
+  sys_chrt(mp->mp_endpoint,dead_line);
 
     return(OK);
 }

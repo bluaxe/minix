@@ -17,12 +17,14 @@ PUBLIC int do_chrt(struct proc * caller, message * m_ptr)
 {
 
   proc_nr_t proc_nr, proc_nr_e;
-  long deadline = m_ptr->CHRT_DEAN_LINE;
+  long deadline = m_ptr->CHRT_DEAD_LINE;
 
   proc_nr_e= (proc_nr_t) m_ptr->CHRT_ENDPOINT;
 
-  //if (!isokendpt(proc_nr_e, &proc_nr)) return(EINVAL);
-  //if (iskerneln(proc_nr)) return(EPERM);
+  /*
+  	if (!isokendpt(proc_nr_e, &proc_nr)) return(EINVAL);
+  	if (iskerneln(proc_nr)) return(EPERM);
+  */
 
 
   return(OK);

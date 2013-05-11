@@ -8,6 +8,7 @@
  * into a message with type SYS_CALL that is handled in a function do_call(). 
  * 
  * Changes:
+ *	 Mar 11, 2013   SYS_CHRT (Dandi Ding :axe )
  *   Mar 01, 2010   SYS_CLEAR and SYS_EXIT split (Cristiano Giuffrida)
  *   Jul 30, 2005   created SYS_INT86 to support BIOS driver  (Philip Homburg) 
  *   Jul 13, 2005   created SYS_PRIVCTL to manage services  (Jorrit N. Herder) 
@@ -205,6 +206,12 @@ _PROTOTYPE( int do_setmcontext, (struct proc * caller, message *m_ptr) );
 
 _PROTOTYPE( int do_schedule,    (struct proc * caller, message *m_ptr) );
 _PROTOTYPE( int do_schedctl, (struct proc * caller, message *m_ptr) );
+
+_PROTOTYPE( int do_chrt, (struct proc * caller, message *m_ptr) );
+#if ! USE_CHRT
+#define do_chrt NULL
+#endif
+
 
 _PROTOTYPE( int do_statectl, (struct proc * caller, message *m_ptr) );
 #if ! USE_STATECTL
