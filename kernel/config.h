@@ -1,4 +1,4 @@
-j#ifndef CONFIG_H
+#ifndef CONFIG_H
 #define CONFIG_H
 
 /* This file defines the kernel configuration. It allows to set sizes of some
