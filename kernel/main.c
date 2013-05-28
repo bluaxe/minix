@@ -58,6 +58,7 @@ PUBLIC int main(void)
 	rp->p_scheduler = NULL;			/* no user space scheduler */
 	rp->p_priority = 0;		        /* no priority */
 	rp->p_quantum_size_ms = 0;	        /* no quantum size */
+  rp->p_chrt_flag = 0;                /* not rt process */
   }
   for (sp = BEG_PRIV_ADDR, i = 0; sp < END_PRIV_ADDR; ++sp, ++i) {
 	sp->s_proc_nr = NONE;			/* initialize as free */

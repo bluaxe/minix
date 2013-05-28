@@ -105,6 +105,9 @@ struct proc {
 
   int p_found;	/* consistency checking variables */
   int p_magic;		/* check validity of proc pointers */
+  
+  short p_chrt_flag;		/* flag that indicates rt process or not */ 
+  timer_t p_rt_timer; 		/* number of ticks for this rt process */
 
 #if DEBUG_TRACE
   int p_schedules;

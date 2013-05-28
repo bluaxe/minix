@@ -31,6 +31,12 @@ PUBLIC int do_clear(struct proc * caller, message * m_ptr)
   }
   rc = proc_addr(exit_p);	/* clean up */
 
+  /* clear rt timer for rt process */
+  if (rc->p_rt_timer.tmr_exp_time!=0) {
+    reset_timer(&rc->p_rt_timer);
+    rc->p_rt_timer.tmr_exp_time = 0;
+  }
+
   release_address_space(rc);
 
   /* Don't clear if already cleared. */

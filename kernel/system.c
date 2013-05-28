@@ -165,6 +165,7 @@ PUBLIC void kernel_call(message *m_user, struct proc * caller)
 PUBLIC void system_init(void)
 {
   register struct priv *sp;
+  register struct proc *rp;
   int i;
 
   /* Initialize IRQ handler hooks. Mark all hooks available. */
@@ -175,6 +176,11 @@ PUBLIC void system_init(void)
   /* Initialize all alarm timers for all processes. */
   for (sp=BEG_PRIV_ADDR; sp < END_PRIV_ADDR; sp++) {
     tmr_inittimer(&(sp->s_alarm_timer));
+  }
+  
+  /* Initialize all rt timers for all processes. */
+  for (rp = BEG_PROC_ADDR, i = -NR_TASKS; rp < END_PROC_ADDR; ++rp, ++i) {
+    tmr_inittimer(&(rp->p_rt_timer));  /* no rt ticks */
   }
 
   /* Initialize the call vector to a safe default handler. Some system calls 
