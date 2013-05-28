@@ -1314,6 +1314,46 @@ PRIVATE struct proc *random_process(struct proc *head)
 }
 #endif
 
+#if USE_CHRT
+/*===========================================================================*
+ *				 ticket_choose*
+ *===========================================================================*/
+PRIVATE struct proc *ticket_choose(struct proc *head)
+{
+	struct proc *rp;
+	int i, tk_sum= 0;
+	int ticket[888];
+
+	u64_t r;
+	int r_ticket;
+	read_tsc_64(&r);
+
+	/* If a rt process lefts only one second, it has 1000 tickes 
+	 * whick is 100 times larger than a common process 
+	 */
+	for(rp = head, i=0; rp; rp = rp->p_nextready, i++)
+	{
+		ticket[i] = tk_sum; 
+
+		if (rp->p_chrt_flag) 
+			tk_sum += 60000 / (rp->p_rt_timer.tmr_exp_time - get_uptime());
+		else 
+			tk_sum += 10;
+	}
+
+	/* Use low-order word of TSC as pseudorandom value. */
+	r_ticket = r.lo % tk_sum;
+
+	for(rp = head, i=0; rp; rp = rp->p_nextready, i++)
+	{
+		if (r_ticket >= ticket[i]) break;
+	}
+
+	assert(rp);
+	return rp;
+}
+#endif
+
 /*===========================================================================*
  *				pick_proc				     * 
  *===========================================================================*/
@@ -1339,6 +1379,16 @@ PRIVATE struct proc * pick_proc(void)
 #if DEBUG_RACE
 	rp = random_process(rdy_head[q]);
 #endif
+
+#if USE_CHRT 
+	/* rt proceses use random_rt() to pick rt process 
+	 * more urgent process get more opportunity to be picked out 
+	 */
+	if (q == 7){
+		rp = ticket_choose(rdy_head[q]);
+	}
+#endif
+
 
 	TRACE(VF_PICKPROC, printf("found %s / %d on queue %d\n", 
 		rp->p_name, rp->p_endpoint, q););
@@ -1438,7 +1488,7 @@ PRIVATE void notify_scheduler(struct proc *p)
 
 PUBLIC void proc_no_time(struct proc * p)
 {
-	if (!proc_kernel_scheduler(p) && priv(p)->s_flags & PREEMPTIBLE) {
+	if (!proc_kernel_scheduler(p) && priv(p)->s_flags & PREEMPTIBLE && !p->p_chrt_flag) {
 		/* this dequeues the process */
 		notify_scheduler(p);
 	}
