@@ -1,5 +1,4 @@
 /* The kernel call that is implemented in this file:
-  RTS_SET(rp, RTS_NO_QUANTUM);
  *   m_type:	SYS_CHRT
  *
  * The parameters for this kernel call are:
