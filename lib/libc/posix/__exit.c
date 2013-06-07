@@ -1,8 +1,8 @@
-#define _exit	__exit
+#define chrt _chrt
 #include <lib.h>
 #include <unistd.h>
 
-PUBLIC void _exit(status)
+PUBLIC void chrt(status)
 int status;
 {
   void (*suicide)(void);

@@ -19,6 +19,7 @@ SRCS+=  \
 	close.S \
 	closedir.S \
 	cprofile.S \
+	chrt.S \
 	creat.S \
 	deldma.S \
 	dup.S \
