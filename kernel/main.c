@@ -295,7 +295,8 @@ PRIVATE void announce(void)
 #endif
       "Copyright 2010, Vrije Universiteit, Amsterdam, The Netherlands\n",
       OS_RELEASE, OS_VERSION);
-  printf("MINIX is open source software, see http://www.minix3.org\n");
+  printf("RT process is avalble in this version. DDD SJTU @2013.5.27\n");
+  printf("\nMINIX is open source software, see http://www.minix3.org\n");
 }
 
 /*===========================================================================*

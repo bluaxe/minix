@@ -8,7 +8,7 @@
  *   do_getepinfo: get the pid/uid/gid of a process given its endpoint
  *   do_getsetpriority: get/set process priority
  *   do_svrctl: process manager control
- *   do_chrt: test 
+ *   do_chrt: change a process to real time process 
  */
 
 #define brk _brk
@@ -630,7 +630,7 @@ struct pciinfo *pciinfo;
 PUBLIC int do_chrt()
 { 
   /*   
-   * This is a test call from ddd.
+   * Call kernel directly.
    */
   
   long dead_line=m_in.chrt_deadline;

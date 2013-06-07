@@ -7,7 +7,7 @@ _CONST long deadline;
 {
   message m;
 
-  /*TODO  -> add deadline to m */
+  if (deadline < 0) return -1;
   m.m4_l1=deadline;
 
   return(_syscall(PM_PROC_NR, CHRT, &m));
