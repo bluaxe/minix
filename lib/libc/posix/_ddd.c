@@ -2,7 +2,7 @@ _#include <lib.h>
 #define ddd _ddd
 #include <unistd.h>
 
-PUBLIC pid_t ddd()
+PUBLIC void ddd()
 {
   message m;
 

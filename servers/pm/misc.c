@@ -622,3 +622,7 @@ struct pciinfo *pciinfo;
 	pciinfo->pi_count = entry - pciinfo->pi_entries;
 	return OK;
 }
+
+PUBLIC void do_ddd(){
+  printf("pm: Hello yoursyscall!\n")
+}
