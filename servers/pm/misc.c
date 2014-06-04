@@ -624,5 +624,5 @@ struct pciinfo *pciinfo;
 }
 
 PUBLIC void do_ddd(){
-  printf("pm: Hello yoursyscall!\n")
+  printf("pm: Hello yoursyscall!\n");
 }
