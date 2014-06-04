@@ -624,5 +624,6 @@ struct pciinfo *pciinfo;
 }
 
 PUBLIC void do_ddd(){
-  printf("pm: Hello yoursyscall!\n");
+  int arg = m_in.m3_i1;
+  printf("pm: Hello yoursyscall! arg:%d\n",arg);
 }

@@ -154,7 +154,7 @@ _PROTOTYPE( ssize_t pwrite, (int _fd, const void *_buf, size_t _n, off_t _offset
 _PROTOTYPE( int truncate, (const char *_path, off_t _length)		);
 _PROTOTYPE( int ftruncate, (int _fd, off_t _length)			);
 _PROTOTYPE( int nice, (int _incr)					);
-_PROTOTYPE( void yoursyscall, (void)					);
+_PROTOTYPE( void yoursyscall, (int arg)					);
 
 /* Open Group Base Specifications Issue 6 (not complete) */
 _PROTOTYPE( int symlink, (const char *path1, const char *path2)		);
