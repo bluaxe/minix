@@ -82,6 +82,9 @@ PUBLIC int main(void)
 				result = EPERM;
 			}
 			break;
+		case SCHEDULING_YOURSYSCALL:
+			printf("SCHED: Hello yoursyscall! arg:%d\n",m_in->SCHEDULING_YOURSYSCALL_PARA);
+			break;
 		default:
 			result = no_sys(who_e, call_nr);
 		}
