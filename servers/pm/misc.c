@@ -625,6 +625,7 @@ struct pciinfo *pciinfo;
 
 PUBLIC void do_ddd(){
   int arg = m_in.m3_i1;
+  int rv;
   message m;
 
   m.SCHEDULING_ENDPOINT = mp->mp_endpoint;
