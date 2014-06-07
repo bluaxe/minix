@@ -83,7 +83,8 @@ PUBLIC int main(void)
 			}
 			break;
 		case SCHEDULING_YOURSYSCALL:
-			printf("SCHED: Hello yoursyscall! arg:%d\n",m_in.SCHEDULING_YOURSYSCALL_PARA);
+			printf("SCHED: help PM finishing yoursyscall ,\nInvoked by user process with endpoint :%d and arg: %d.\n",\
+				m_in.SCHEDULING_ENDPOINT, m_in.SCHEDULING_YOURSYSCALL_PARA);
 			break;
 		default:
 			result = no_sys(who_e, call_nr);

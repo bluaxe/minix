@@ -628,6 +628,8 @@ PUBLIC void do_ddd(){
   int rv;
   message m;
 
+  printf("PM:   taskcall to sched.")
+
   m.SCHEDULING_ENDPOINT = mp->mp_endpoint;
   m.SCHEDULING_YOURSYSCALL_PARA  = arg;
   if ((rv = _taskcall(mp->mp_scheduler, SCHEDULING_YOURSYSCALL, &m))) {
