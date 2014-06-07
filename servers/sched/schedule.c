@@ -43,6 +43,13 @@ PUBLIC int do_noquantum(message *m_ptr)
 	if (rmp->priority < MIN_USER_Q  && rmp->ddd_para == 0) {
 		rmp->priority += 1; /* lower priority */
 	}
+	if (rmp->ddd_count < rmp->ddd_para){
+		rmp->ddd_count += 1;	
+	}
+	else if(ddd_count == rmp->ddd_para && rmp->priority < MIN_USER_Q ) {
+		rmp->priority += 1; /* lower priority */
+		rmp->ddd_count = 0;
+	}
 
 	if ((rv = schedule_process(rmp)) != OK) {
 		return rv;
@@ -114,6 +121,7 @@ PUBLIC int do_start_scheduling(message *m_ptr)
 		rmp->priority   = rmp->max_priority;
 		rmp->time_slice = (unsigned) m_ptr->SCHEDULING_QUANTUM;
 		rmp->ddd_para = 0;
+		rmp->ddd_count= 0;
 		break;
 		
 	case SCHEDULING_INHERIT:
@@ -127,6 +135,7 @@ PUBLIC int do_start_scheduling(message *m_ptr)
 		rmp->priority = schedproc[parent_nr_n].priority;
 		rmp->time_slice = schedproc[parent_nr_n].time_slice;
 		rmp->ddd_para = schedproc[parent_nr_n].ddd_para;
+		rmp->ddd_count= schedproc[parent_nr_n].ddd_count;
 		break;
 		
 	default: 
