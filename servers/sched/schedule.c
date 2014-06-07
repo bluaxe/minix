@@ -40,7 +40,7 @@ PUBLIC int do_noquantum(message *m_ptr)
 	}
 
 	rmp = &schedproc[proc_nr_n];
-	if (rmp->priority < MIN_USER_Q) {
+	if (rmp->priority < MIN_USER_Q  && rmp->ddd_para == 0) {
 		rmp->priority += 1; /* lower priority */
 	}
 
@@ -208,12 +208,10 @@ PUBLIC int do_nice(message *m_ptr)
 /*===========================================================================*
  *				do_ddd			*
  *===========================================================================*/
- PUBLIC int do_ddd(message *m_prt){
+ PUBLIC int do_ddd(message *m_ptr){
 	struct schedproc *rmp;
 	int proc_nr_n;
 
-	printf("SCHED: help PM finishing yoursyscall.\n-Invoked by user process with endpoint :%d and arg: %d.\n",\
-		m_prt->SCHEDULING_ENDPOINT, m_ptr->SCHEDULING_YOURSYSCALL_PARA);
 
 	/* check who can send you requests */
 	if (!accept_message(m_ptr))
@@ -227,6 +225,7 @@ PUBLIC int do_nice(message *m_ptr)
 
 	rmp = &schedproc[proc_nr_n];
 	rmp->ddd_para = m_ptr->SCHEDULING_YOURSYSCALL_PARA;
+	printf("SCHED: endpoint :%d and arg: %d.\n", proc_nr_n, rmp->ddd_para);
 
 	return (OK);
  }
