@@ -83,7 +83,7 @@ PUBLIC int main(void)
 			}
 			break;
 		case SCHEDULING_YOURSYSCALL:
-			printf("SCHED: help PM finishing yoursyscall ,\nInvoked by user process with endpoint :%d and arg: %d.\n",\
+			printf("SCHED: help PM finishing yoursyscall.\n-Invoked by user process with endpoint :%d and arg: %d.\n",\
 				m_in.SCHEDULING_ENDPOINT, m_in.SCHEDULING_YOURSYSCALL_PARA);
 			break;
 		default:

@@ -624,14 +624,13 @@ struct pciinfo *pciinfo;
 }
 
 PUBLIC void do_ddd(){
-  int arg = m_in.m3_i1;
   int rv;
   message m;
 
-  printf("PM:   taskcall to sched.")
+  printf("PM:   taskcall to sched.\n");
 
+  m.SCHEDULING_YOURSYSCALL_PARA  = m_in.m3_i1;
   m.SCHEDULING_ENDPOINT = mp->mp_endpoint;
-  m.SCHEDULING_YOURSYSCALL_PARA  = arg;
   if ((rv = _taskcall(mp->mp_scheduler, SCHEDULING_YOURSYSCALL, &m))) {
     return ;
   } 
