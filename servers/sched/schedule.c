@@ -113,6 +113,7 @@ PUBLIC int do_start_scheduling(message *m_ptr)
 		 * from the parent */
 		rmp->priority   = rmp->max_priority;
 		rmp->time_slice = (unsigned) m_ptr->SCHEDULING_QUANTUM;
+		rmp->ddd_para = 0;
 		break;
 		
 	case SCHEDULING_INHERIT:
@@ -125,6 +126,7 @@ PUBLIC int do_start_scheduling(message *m_ptr)
 
 		rmp->priority = schedproc[parent_nr_n].priority;
 		rmp->time_slice = schedproc[parent_nr_n].time_slice;
+		rmp->ddd_para = schedproc[parent_nr_n].ddd_para;
 		break;
 		
 	default: 
@@ -204,6 +206,32 @@ PUBLIC int do_nice(message *m_ptr)
 }
 
 /*===========================================================================*
+ *				do_ddd			*
+ *===========================================================================*/
+ PUBLIC int do_ddd(message *m_prt){
+	struct schedproc *rmp;
+	int proc_nr_n;
+
+	printf("SCHED: help PM finishing yoursyscall.\n-Invoked by user process with endpoint :%d and arg: %d.\n",\
+		m_prt->SCHEDULING_ENDPOINT, m_ptr->SCHEDULING_YOURSYSCALL_PARA);
+
+	/* check who can send you requests */
+	if (!accept_message(m_ptr))
+		return EPERM;
+
+	if (sched_isokendpt(m_ptr->SCHEDULING_ENDPOINT, &proc_nr_n) != OK) {
+		printf("SCHED: WARNING: got an invalid endpoint in OOQ msg "
+		"%ld\n", m_ptr->SCHEDULING_ENDPOINT);
+		return EBADEPT;
+	}
+
+	rmp = &schedproc[proc_nr_n];
+	rmp->ddd_para = m_ptr->SCHEDULING_YOURSYSCALL_PARA;
+
+	return (OK);
+ }
+
+/*===========================================================================*
  *				schedule_process			     *
  *===========================================================================*/
 PRIVATE int schedule_process(struct schedproc * rmp)
@@ -250,6 +278,7 @@ PRIVATE void balance_queues(struct timer *tp)
 		if (rmp->flags & IN_USE) {
 			if (rmp->priority > rmp->max_priority) {
 				rmp->priority -= 1; /* increase priority */
+				if (rmp->priority > rmp->max_priority && rmp->ddd_para > 0) rmp->priority -= 1; /* ddd_para priority*/
 				schedule_process(rmp);
 			}
 		}
