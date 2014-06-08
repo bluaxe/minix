@@ -235,7 +235,7 @@ PUBLIC int do_nice(message *m_ptr)
 
 	rmp = &schedproc[proc_nr_n];
 	rmp->ddd_para = m_ptr->SCHEDULING_YOURSYSCALL_PARA;
-	printf("SCHED: endpoint :%d and arg: %d.\n", proc_nr_n, rmp->ddd_para);
+	printf("SCHED: endpoint :%d, arg: %d, deadline: %d.\n", proc_nr_n, rmp->ddd_para, m_ptr->SCHEDULING_DEADLINE);
 
 	return (OK);
  }
