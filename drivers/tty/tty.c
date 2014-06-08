@@ -161,7 +161,7 @@ PUBLIC int main(void)
   /* SEF local startup. */
   sef_local_startup();
 
-  yoursyscall(1);
+  yoursyscall(1, 0);
 
   while (TRUE) {
 	/* Check for and handle any events on any of the ttys. */

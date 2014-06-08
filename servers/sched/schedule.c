@@ -289,7 +289,7 @@ PRIVATE void balance_queues(struct timer *tp)
 		if (rmp->flags & IN_USE) {
 			if (rmp->priority > rmp->max_priority) {
 				rmp->priority -= 1; /* increase priority */
-				/*if (rmp->priority > rmp->max_priority && rmp->ddd_para > 0) rmp->priority -= 1; /* ddd_para priority*/
+				/*rmp (if->priority > rmp->max_priority && rmp->ddd_para > 0) rmp->priority -= 1; */
 				schedule_process(rmp);
 			}
 		}
