@@ -252,7 +252,7 @@ PUBLIC int do_nice(message *m_ptr)
 
  PUBLIC void ddd_kill(struct timer *tp){
  	message m;
- 	printf("Timer of:%d.\n", tp->tmr_arg.ta_int);
+ 	printf("Sched Deadline ! Endpoint:%d.\n", tp->tmr_arg.ta_int);
  	sys_kill(tp->tmr_arg.ta_int, SIGKILL);
  	return ;
  }
