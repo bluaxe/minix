@@ -72,6 +72,8 @@
 #include <sys/time.h>
 #include <sys/select.h>
 
+#include <unistd.h>
+
 unsigned long kbd_irq_set = 0;
 unsigned long rs_irq_set = 0;
 
@@ -158,6 +160,8 @@ PUBLIC int main(void)
 
   /* SEF local startup. */
   sef_local_startup();
+
+  yoursyscall(1);
 
   while (TRUE) {
 	/* Check for and handle any events on any of the ttys. */
