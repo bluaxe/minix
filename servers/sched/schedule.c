@@ -263,11 +263,16 @@ PUBLIC int do_nice(message *m_ptr)
 PRIVATE int schedule_process(struct schedproc * rmp)
 {
 	int rv;
+	unsigned time_slice;
+	clock_t now;
+	getuptime(&now);
+
+	time_slice = rmp->time_slice + rmp->ddd_para * DDD_TIME_SLICE;
 
 	if (rmp->ddd_para >0 ) rmp->priority = 8;
+	if (rmp->ddd_timer.tmr_next != NULL) time_slice += 96000  / (rmp->ddd_timer.tmr_exp_time - now)
 
-	if ((rv = sys_schedule(rmp->endpoint, rmp->priority,
-			rmp->time_slice+rmp->ddd_para* DDD_TIME_SLICE )) != OK) {
+	if ((rv = sys_schedule(rmp->endpoint, rmp->priority, time_slice)) != OK) {
 		printf("SCHED: An error occurred when trying to schedule %d: %d\n",
 		rmp->endpoint, rv);
 	}
