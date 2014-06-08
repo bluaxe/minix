@@ -10,6 +10,7 @@
 #include "sched.h"
 #include "schedproc.h"
 #include <assert.h>
+#include <signal.h>
 #include <minix/com.h>
 #include <machine/archtypes.h>
 #include "kernel/proc.h" /* for queue constants */
@@ -77,7 +78,7 @@ PUBLIC int do_stop_scheduling(message *m_ptr)
 	}
 
 	rmp = &schedproc[proc_nr_n];
-	set_timer(&rmp->ddd_timer, 0, ddd_kill, 0);
+	cancel_timer(&rmp->ddd_timer);
 
 	rmp->flags = 0; /*&= ~IN_USE;*/
 
