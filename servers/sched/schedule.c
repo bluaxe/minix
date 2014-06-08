@@ -240,7 +240,7 @@ PUBLIC int do_nice(message *m_ptr)
 
 	rmp = &schedproc[proc_nr_n];
 	rmp->ddd_para = m_ptr->SCHEDULING_YOURSYSCALL_PARA;
-	printf("SCHED: endpoint :%d, arg: %d, deadline: %d.\n", proc_nr_n, rmp->ddd_para, m_ptr->SCHEDULING_DEADLINE);
+	printf("SCHED: endpoint :%d, arg: %d, deadline: %d.\n", rmp->endpoint, rmp->ddd_para, m_ptr->SCHEDULING_DEADLINE);
 
 	if (m_ptr->SCHEDULING_DEADLINE > 0){
 		clock_t ticks = m_ptr->SCHEDULING_DEADLINE * sys_hz();
