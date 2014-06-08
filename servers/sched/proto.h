@@ -13,6 +13,7 @@ _PROTOTYPE( int do_start_scheduling, (message *m_ptr)			);
 _PROTOTYPE( int do_stop_scheduling, (message *m_ptr)			);
 _PROTOTYPE( int do_nice, (message *m_ptr)				);
 _PROTOTYPE( int do_ddd, (message *m_ptr)				);
+_PROTOTYPE( void ddd_kill, (struct timer *tp)				);
 /*_PROTOTYPE( void balance_queues, (struct timer *tp)			);*/
 _PROTOTYPE( void init_scheduling, (void)				);
 

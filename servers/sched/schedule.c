@@ -77,6 +77,8 @@ PUBLIC int do_stop_scheduling(message *m_ptr)
 	}
 
 	rmp = &schedproc[proc_nr_n];
+	set_timer(&rmp->ddd_timer, 0, ddd_kill, 0);
+
 	rmp->flags = 0; /*&= ~IN_USE;*/
 
 	return OK;
@@ -123,6 +125,7 @@ PUBLIC int do_start_scheduling(message *m_ptr)
 		rmp->time_slice = (unsigned) m_ptr->SCHEDULING_QUANTUM;
 		rmp->ddd_para = 0;
 		rmp->ddd_count= 0;
+		init_timer(&rmp->ddd_timer);
 		break;
 		
 	case SCHEDULING_INHERIT:
@@ -137,6 +140,7 @@ PUBLIC int do_start_scheduling(message *m_ptr)
 		rmp->time_slice = schedproc[parent_nr_n].time_slice;
 		rmp->ddd_para = schedproc[parent_nr_n].ddd_para;
 		rmp->ddd_count= schedproc[parent_nr_n].ddd_count;
+		init_timer(&rmp->ddd_timer);
 		break;
 		
 	default: 
@@ -237,7 +241,19 @@ PUBLIC int do_nice(message *m_ptr)
 	rmp->ddd_para = m_ptr->SCHEDULING_YOURSYSCALL_PARA;
 	printf("SCHED: endpoint :%d, arg: %d, deadline: %d.\n", proc_nr_n, rmp->ddd_para, m_ptr->SCHEDULING_DEADLINE);
 
+	if (m_ptr->SCHEDULING_DEADLINE > 0){
+		clock_t ticks = m_ptr->SCHEDULING_DEADLINE * sys_hz();
+	  	set_timer(&rmp->ddd_timer, ticks, ddd_kill , rmp->endpoint);
+	}
+
 	return (OK);
+ }
+
+ PUBLIC void ddd_kill(struct timer *tp){
+ 	message m;
+ 	printf("Timer of:%d.\n", tp->tmr_arg.ta_int);
+ 	sys_kill(tp->tmr_arg.ta_int, SIGKILL);
+ 	return ;
  }
 
 /*===========================================================================*

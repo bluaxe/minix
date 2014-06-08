@@ -25,6 +25,7 @@ EXTERN struct schedproc {
 	unsigned time_slice;		/* this process's time slice */
 	unsigned ddd_para;
 	unsigned ddd_count;
+	struct timer ddd_timer;
 } schedproc[NR_PROCS];
 
 /* Flag values */
