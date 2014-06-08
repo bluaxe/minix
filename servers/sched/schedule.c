@@ -23,6 +23,7 @@ FORWARD _PROTOTYPE( int schedule_process, (struct schedproc * rmp)	);
 FORWARD _PROTOTYPE( void balance_queues, (struct timer *tp)		);
 
 #define DEFAULT_USER_TIME_SLICE 200
+#define DDD_TIME_SLICE 50
 
 /*===========================================================================*
  *				do_noquantum				     *
@@ -46,8 +47,8 @@ PUBLIC int do_noquantum(message *m_ptr)
 	if (rmp->ddd_count < rmp->ddd_para){
 		rmp->ddd_count += 1;	
 	}
-	else if(ddd_count == rmp->ddd_para && rmp->priority < MIN_USER_Q ) {
-		rmp->priority += 1; /* lower priority */
+	else if(rmp->ddd_count == rmp->ddd_para && rmp->priority < MIN_USER_Q ) {
+		/*rmp->priority += 1; */
 		rmp->ddd_count = 0;
 	}
 
@@ -247,7 +248,7 @@ PRIVATE int schedule_process(struct schedproc * rmp)
 	int rv;
 
 	if ((rv = sys_schedule(rmp->endpoint, rmp->priority,
-			rmp->time_slice)) != OK) {
+			rmp->time_slice+rmp->ddd_para* DDD_TIME_SLICE )) != OK) {
 		printf("SCHED: An error occurred when trying to schedule %d: %d\n",
 		rmp->endpoint, rv);
 	}
